@@ -13,7 +13,7 @@
 </script>
 
 <div class="life-wrapper">
-    <button on:click={decrease}> - </button>
+    <button on:click={decrease}/>
     <p on:click={showModal}>{life}</p>
-    <button on:click={increase}> + </button>
+    <button on:click={increase}/>
 </div>

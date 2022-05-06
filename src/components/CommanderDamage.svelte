@@ -28,7 +28,7 @@
 </script>
 
 <div class="counter-wrapper">
-    <button class="inc" on:click={increase}> + </button>
+    <button class="inc" on:click={increase}><img src="/assets/chevron-up.svg" alt="increase life"></button>
     <p>{damage}</p>
-    <button class="dec" on:click={decrease}> - </button>
+    <button class="dec" on:click={decrease}><img src="/assets/chevron-down.svg" alt="decrease life"></button>
 </div>
