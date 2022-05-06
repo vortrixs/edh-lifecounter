@@ -1,30 +1,51 @@
+<style>
+	.commander-damage {
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	.life-counter {
+		margin-top: 50px;
+		display: flex;
+		justify-content: center;
+	}
+
+	.life-calc {
+		z-index: 9999;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding-top: 50%;
+		background-color: black;
+	}
+</style>
+
 <script lang="ts">
-	export let name: string;
+	import LifeCounter from "./components/LifeCounter.svelte";
+	import CommanderDamage from "./components/CommanderDamage.svelte";
+	import Calculator from './components/Calculator.svelte';
+
+	let life = 40;
+	let showCalculator = false;
+	const increase = () => life++;
+	const decrease = () => life--;
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<div class="commander-damage">
+		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
+		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
+		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
+		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
+		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
+	</div>
+	<div class="life-counter">
+		<LifeCounter life={life} increase={increase} decrease={decrease} showModal={() => showCalculator = true} />
+	</div>
+	
+	{#if showCalculator}
+		<div class="life-calc"><Calculator hide={() => showCalculator = false} update={(newLife) => life = newLife} /></div>
+	{/if}
 </main>
-
-<style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
-
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
-</style>
