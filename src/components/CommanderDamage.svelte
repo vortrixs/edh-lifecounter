@@ -4,6 +4,27 @@
         flex-flow: column;
         align-items: center;
     }
+
+    .damage {
+        font-size: 30px;
+        margin: 5px 0;
+    }
+
+    .decrease > img {
+        transform: translateY(1px);
+    }
+
+    .increase, .decrease {
+        border-color: unset;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        background-color: #dddddd;
+    }
+
+    :is(.increase, .decrease):active {
+        background-color: #5f5f5f;
+    }
 </style>
 
 <script lang="ts">
@@ -28,7 +49,7 @@
 </script>
 
 <div class="counter-wrapper">
-    <button class="inc" on:click={increase}><img src="/assets/chevron-up.svg" alt="increase life"></button>
-    <p>{damage}</p>
-    <button class="dec" on:click={decrease}><img src="/assets/chevron-down.svg" alt="decrease life"></button>
+    <button class="increase" on:click={increase}><img src="/assets/chevron-up.svg" alt="increase life"></button>
+    <span class="damage">{damage}</span>
+    <button class="decrease" on:click={decrease}><img src="/assets/chevron-down.svg" alt="decrease life"></button>
 </div>
