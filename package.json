@@ -1,0 +1,11 @@
+{
+  "name": "edh-lifecounter",
+  "version": "1.0.0",
+  "description": "An app for keeping track of life and commander damage in EDH games",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Hans Erik Jepsen",
+  "license": "ISC"
+}
