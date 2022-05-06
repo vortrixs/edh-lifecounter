@@ -11,6 +11,10 @@
         font-size: 80px;
     }
 
+    .life.dead {
+        color: #d84646;
+    }
+
     .increase, .decrease {
         background-color: transparent;
         border: unset;
@@ -28,10 +32,12 @@
     export let increase: () => void;
     export let decrease: () => void;
     export let showModal: () => void;
+
+    $: isDead = life <= 0;
 </script>
 
 <div class="life-wrapper">
     <button class="decrease" on:click={decrease}/>
-    <p class="life" on:click={showModal}>{life}</p>
+    <p class="life {isDead ? 'dead' : ''}" on:click={showModal}>{life}</p>
     <button class="increase" on:click={increase}/>
 </div>

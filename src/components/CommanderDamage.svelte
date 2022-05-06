@@ -10,6 +10,10 @@
         margin: 5px 0;
     }
 
+    .damage.dead {
+        color: #d84646;
+    }
+
     .decrease > img {
         transform: translateY(1px);
     }
@@ -46,10 +50,12 @@
            increaseLife()
         }
     }
+
+    $: isDead = damage === 21;
 </script>
 
 <div class="counter-wrapper">
     <button class="increase" on:click={increase}><img src="/assets/chevron-up.svg" alt="increase life"></button>
-    <span class="damage">{damage}</span>
+    <span class="damage {isDead ? 'dead' : ''}">{damage}</span>
     <button class="decrease" on:click={decrease}><img src="/assets/chevron-down.svg" alt="decrease life"></button>
 </div>
