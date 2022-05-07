@@ -25,16 +25,8 @@ jobs:
         cache: 'npm'
     - run: npm i
     - run: npm run build
-    - name: Deploy
-      uses: easingthemes/ssh-deploy@v2.2.11
-      env:
-        # Private Key
-        SSH_PRIVATE_KEY: ${{ secrets.SSHPKEY }}
-        # Remote host
-        REMOTE_HOST: linux119.unoeuro.com
-        # Remote user
-        REMOTE_USER: he-jepsen.dk
-        # Source directory
-        SOURCE: ./public
-        # Target directory
-        TARGET: /var/www/he-jepsen.dk/edhlc
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.0.0
+      with:
+        name: dist
+        path: ./public
