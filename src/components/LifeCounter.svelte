@@ -5,9 +5,11 @@
         display: flex;
         gap: 10px;
         align-items: center;
+        justify-content: center;
     }
 
     .counters {
+        z-index: 0;
         display: flex;
         flex-flow: column;
         align-items: center;
@@ -39,15 +41,27 @@
         color: #d84646;
     }
 
+    .increase {
+        right: 0;
+    }
+
+    .decrease {
+        left: 0;
+    }
+
     .increase, .decrease {
+        z-index: 1;
+        position: fixed;
+        bottom: 0;
         background-color: transparent;
         border: unset;
-        width: 100%;
-        height: 100%;
+        width: 35%;
+        height: 50%;
     }
 
     :is(.increase, .decrease):active {
-        background-color: hsl(0, 0%, 21%);
+        background-color: hsl(0, 0%, 22%);
+        opacity: .5;
     }
 </style>
 
