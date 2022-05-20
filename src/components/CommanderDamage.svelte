@@ -7,7 +7,7 @@
 
     .damage {
         font-size: 30px;
-        margin: 5px 0;
+        margin: 15px 0;
     }
 
     .damage.dead {
@@ -24,10 +24,11 @@
         width: 40px;
         height: 40px;
         background-color: #dddddd;
+        margin: 0;
     }
 
     :is(.increase, .decrease):active {
-        background-color: #5f5f5f;
+        background-color: #b6b6b6;
     }
 </style>
 
@@ -36,6 +37,8 @@
     export let decreaseLife: () => void;
 
     let damage = 0;
+
+    $: isDead = damage === 21;
 
     const increase = () => {
         if (damage < 21) {
@@ -50,8 +53,6 @@
            increaseLife()
         }
     }
-
-    $: isDead = damage === 21;
 </script>
 
 <div class="counter-wrapper">

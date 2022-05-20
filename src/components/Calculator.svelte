@@ -24,13 +24,17 @@
 
     .number, .subtract {
         border: unset;
-        background-color: #cecece;
+        background-color: #dddddd;
         border-radius: 12px;
         max-height: 40px;
     }
 
     .number,.delete, .subtract {
         margin: 0 .5em .5em;
+    }
+
+    .number:active {
+        background-color: #b6b6b6;
     }
 
     .subtract {
@@ -41,11 +45,6 @@
 
     #calculator-subtract-toggle {
         display: none;
-    }
-
-    #calculator-subtract-toggle:checked ~ .subtract {
-        background-color: #3c3cff;
-        color: #ffffff;
     }
 
     .delete {
@@ -74,7 +73,7 @@
         border-width: 4px;
     }
 
-    .save {
+    .save, #calculator-subtract-toggle:checked ~ .subtract {
         border: unset;
         background-color: #3c3cff;
         color: #ffffff;
@@ -111,7 +110,7 @@
 <div class="calculator">
     <div class="result">
         <span>{subtract ? '-' : '+'}</span>
-        <span>{result}</span>
+        <span class="result">{result}</span>
     </div>
     <div class="buttons">
         <button on:click={() => updateResult('1')} class="number">1</button>

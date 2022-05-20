@@ -46,6 +46,7 @@
 
 	let life = 40;
 	let showCalculator = false;
+	
 	const increase = () => life++;
 	const decrease = () => life--;
 </script>

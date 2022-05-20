@@ -72,6 +72,16 @@
     export let showModal: () => void;
 
     let timeout: NodeJS.Timeout;
+    let ticker = 0;
+
+    $: lifeTick = (ticker<=0?"":"+") + ticker;
+    $: isDead = life <= 0;
+    $: tickerClasses = [
+        'ticker',
+        ticker === 0 ? 'hidden' : null,
+        ticker > 0 ? 'positive' : null,
+        ticker < 0 ? 'negative' : null,
+    ].filter(Boolean).join(' ').trim();
 
     const increaseLife = () => {
         increase();
@@ -86,24 +96,12 @@
         clearTimeout(timeout);
         timeout = setTimeout(() => ticker = 0, 2000)
     }
-
-    let ticker = 0;
-
-    $: lifeTick = (ticker<=0?"":"+") + ticker;
-    $: isDead = life <= 0;
-
-    $: tickerClasses = [
-        'ticker',
-        ticker === 0 ? 'hidden' : '',
-        ticker > 0 ? 'positive' : '',
-        ticker < 0 ? 'negative' : '',
-    ];
 </script>
 
 <div class="life-wrapper">
     <button class="decrease" on:click={decreaseLife}/>
     <div class="counters">
-        <p class={tickerClasses.join(' ').trim()}>{lifeTick}</p>
+        <p class={tickerClasses}>{lifeTick}</p>
         <p class="life {isDead ? 'dead' : ''}" on:click={showModal}>{life}</p>
     </div>
     <button class="increase" on:click={increaseLife}/>
