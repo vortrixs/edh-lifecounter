@@ -15,6 +15,10 @@ body {
 	font-weight: 900;
 }
 
+:fullscreen::backdrop {
+	background-color: #333;
+}
+
 a {
 	color: rgb(0,100,200);
 	text-decoration: none;

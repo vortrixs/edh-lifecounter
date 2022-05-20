@@ -37,6 +37,13 @@
 		height: inherit;
 		justify-content: center;
 	}
+
+	.fullscreen-toggle {
+		position: fixed;
+		z-index: 10;
+		padding: 10px;
+		filter: invert();
+	}
 </style>
 
 <script lang="ts">
@@ -46,12 +53,30 @@
 
 	let life = 40;
 	let showCalculator = false;
+	let isFullscreen = false;
 	
 	const increase = () => life++;
 	const decrease = () => life--;
+	const toggleFullscreen = () => {
+		if (isFullscreen) {
+			document.exitFullscreen().then(() => isFullscreen = false);
+			return;
+		}
+
+		document.querySelector('body').requestFullscreen().then(() => isFullscreen = true);
+	}
 </script>
 
 <main>
+	{#if document.fullscreenEnabled}
+	<span class="fullscreen-toggle" on:click={toggleFullscreen}>
+		{#if isFullscreen}
+			<img src="/assets/minimize.svg" alt="Exit Fullscreen">
+		{:else}
+			<img src="/assets/maximize.svg" alt="Enter Fullscreen">
+		{/if}
+	</span>
+	{/if}
 	<div class="commander-damage">
 		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
 		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
@@ -62,11 +87,12 @@
 	<div class="life-counter">
 		<LifeCounter life={life} increase={increase} decrease={decrease} showModal={() => showCalculator = true} />
 	</div>
-</main>
-{#if showCalculator}
-<div class="modal">
-	<div class="life-calc">
-		<Calculator currentLife={life} hide={() => showCalculator = false} update={(newLife) => life = newLife} />
+
+	{#if showCalculator}
+	<div class="modal">
+		<div class="life-calc">
+			<Calculator currentLife={life} hide={() => showCalculator = false} update={(newLife) => life = newLife} />
+		</div>
 	</div>
-</div>
-{/if}
+	{/if}
+</main>
