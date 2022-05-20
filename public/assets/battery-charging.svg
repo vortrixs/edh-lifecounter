@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg width="6.35mm" height="3.7042mm" version="1.1" viewBox="0 0 6.35 3.7042" xmlns="http://www.w3.org/2000/svg">
+ <g transform="translate(-122.26 -21.903)">
+  <g transform="matrix(.26458 0 0 .26458 122.26 20.58)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+   <path d="m5 18h-2a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h3.19m8.81 0h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-3.19"/>
+   <line x1="23" x2="23" y1="13" y2="11"/>
+   <polyline points="11 6 7 12 13 12 9 18"/>
+  </g>
+ </g>
+</svg>
