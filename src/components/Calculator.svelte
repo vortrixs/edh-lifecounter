@@ -22,19 +22,30 @@
         margin-top: 20px;
     }
 
-    .number {
+    .number, .subtract {
         border: unset;
         background-color: #cecece;
         border-radius: 12px;
         max-height: 40px;
     }
 
-    .number,.delete {
+    .number,.delete, .subtract {
         margin: 0 .5em .5em;
     }
 
-    .number.last {
-        grid-column: 2;
+    .subtract {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #calculator-subtract-toggle {
+        display: none;
+    }
+
+    #calculator-subtract-toggle:checked ~ .subtract {
+        background-color: #3c3cff;
+        color: #ffffff;
     }
 
     .delete {
@@ -71,11 +82,11 @@
 </style>
 
 <script lang="ts">
-    import '@fortawesome/fontawesome-free/css/all.min.css'
-
+    export let currentLife: number;
     export let hide: () => void;
     export let update: (life: number) => void;   
 
+    let subtract = false;
     let result = '0';
 
     const updateResult = (number: string) => {
@@ -84,7 +95,9 @@
     }
 
     const save = () => {
-        update(parseInt(result, 10));
+        subtract
+            ? update(currentLife - parseInt(result, 10))
+            : update(currentLife + parseInt(result, 10));
         hide();
     };
 
@@ -96,7 +109,10 @@
 </script>
 
 <div class="calculator">
-    <span class="result">{result}</span>
+    <div class="result">
+        <span>{subtract ? '-' : '+'}</span>
+        <span>{result}</span>
+    </div>
     <div class="buttons">
         <button on:click={() => updateResult('1')} class="number">1</button>
         <button on:click={() => updateResult('2')} class="number">2</button>
@@ -107,11 +123,15 @@
         <button on:click={() => updateResult('7')} class="number">7</button>
         <button on:click={() => updateResult('8')} class="number">8</button>
         <button on:click={() => updateResult('9')} class="number">9</button>
-        <button on:click={() => updateResult('0')} class="number last">0</button>
+        <input id="calculator-subtract-toggle" type="checkbox"  on:change={() => subtract = !subtract}/>
+        <label for="calculator-subtract-toggle" class="subtract">
+            <span>-</span>
+        </label>
+        <button on:click={() => updateResult('0')} class="number">0</button>
         <button on:click={deleteChar} class="delete"><img src="/assets/delete.svg" alt="delete"></button>
     </div>
     <div class="actions">
         <button on:click={hide} class="cancel">Cancel</button>
-        <button on:click={save} class="save">Set</button>
+        <button on:click={save} class="save">Update</button>
     </div>
 </div>

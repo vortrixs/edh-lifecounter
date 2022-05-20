@@ -65,7 +65,7 @@
 {#if showCalculator}
 <div class="modal">
 	<div class="life-calc">
-		<Calculator hide={() => showCalculator = false} update={(newLife) => life = newLife} />
+		<Calculator currentLife={life} hide={() => showCalculator = false} update={(newLife) => life = newLife} />
 	</div>
 </div>
 {/if}
