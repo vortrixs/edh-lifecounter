@@ -13,15 +13,18 @@
 	const bodyRef = document.querySelector('body');
 	let isFullscreen = false;
 
-	const toggleFullscreen = () => isFullscreen ? document.exitFullscreen() : bodyRef.requestFullscreen();
+	const toggleFullscreen = () => {
+		if (isFullscreen) document.exitFullscreen().then(() => isFullscreen = false)
+		else bodyRef.requestFullscreen().then(() => isFullscreen = true)
+	};
 
 	new ResizeObserver((entries) => {
 		const contentHeight = entries[0].contentRect.height;
 
+		console.log(contentHeight, window.outerHeight, window.innerHeight);
+
 		if (contentHeight < window.outerHeight) {
 			isFullscreen = false;
-		} else if (contentHeight === window.outerHeight) {
-			isFullscreen = true;
 		}
 	}).observe(bodyRef);
 </script>
