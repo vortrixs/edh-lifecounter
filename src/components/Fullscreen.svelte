@@ -20,12 +20,8 @@
 
 	new ResizeObserver((entries) => {
 		const contentHeight = entries[0].contentRect.height;
-
-		console.log(contentHeight, window.outerHeight, window.innerHeight);
-
-		if (contentHeight < window.outerHeight) {
-			isFullscreen = false;
-		}
+		
+		if (contentHeight < window.outerHeight) isFullscreen = false;
 	}).observe(bodyRef);
 </script>
 
