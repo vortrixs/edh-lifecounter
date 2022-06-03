@@ -8,16 +8,20 @@
 </style>
 
 <script>
+	const bodyRef = document.querySelector('body');
 	let isFullscreen = false;
 
-    const toggleFullscreen = () => {
-		if (isFullscreen) {
-			document.exitFullscreen().then(() => isFullscreen = false);
-			return;
-		}
+	const toggleFullscreen = () => isFullscreen ? document.exitFullscreen() : bodyRef.requestFullscreen();
 
-		document.querySelector('body').requestFullscreen().then(() => isFullscreen = true);
-	}
+	new ResizeObserver((entries) => {
+		const contentHeight = entries[0].contentRect.height;
+
+		if (contentHeight < window.outerHeight) {
+			isFullscreen = false;
+		} else if (contentHeight === window.outerHeight) {
+			isFullscreen = true;
+		}
+	}).observe(bodyRef);
 </script>
 
 {#if document.fullscreenEnabled}
