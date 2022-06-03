@@ -34,16 +34,15 @@
 
     navigator.getBattery().then((battery) => {
         const updateChargeInfo = () => {
-            const actualLevel = battery.level*100;
-            level_percentage = actualLevel;
+            level_percentage = battery.level*100;
 
             if (battery.charging) {
                 level = levels.charging;
             } else {
-                if (actualLevel>75) level = levels.p100;
-                else if (actualLevel>50) level = levels.p75;
-                else if (actualLevel>25) level = levels.p50;
-                else if (actualLevel>10) level = levels.p25;
+                if (level_percentage>75) level = levels.p100;
+                else if (level_percentage>50) level = levels.p75;
+                else if (level_percentage>25) level = levels.p50;
+                else if (level_percentage>10) level = levels.p25;
                 else level = levels.empty;
             }
         }
