@@ -7,6 +7,17 @@
 		justify-content: space-between;
 	}
 
+	.header {
+		position: fixed;
+		z-index: 10;
+		width: 100%;
+		
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: 10px;
+	}
+
 	.commander-damage {
 		height: 50%;
 		display: flex;
@@ -54,7 +65,10 @@
 </script>
 
 <main>
-	<Fullscreen />
+	<div class="header">
+		<Fullscreen />
+		<Battery />
+	</div>
 	<div class="commander-damage">
 		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
 		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />

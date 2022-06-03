@@ -1,8 +1,10 @@
 <style>
     .fullscreen-toggle {
-		position: fixed;
-		z-index: 10;
-		padding: 10px;
+		display: flex;
+		padding-left: 10px;
+	}
+
+	.fullscreen-toggle > img {
 		filter: invert();
 	}
 </style>
