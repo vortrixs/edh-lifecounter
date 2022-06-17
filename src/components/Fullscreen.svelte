@@ -9,7 +9,7 @@
 	}
 </style>
 
-<script>
+<script lang="ts">
 	const bodyRef = document.querySelector('body');
 	let isFullscreen = false;
 

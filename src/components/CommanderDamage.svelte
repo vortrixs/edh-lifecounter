@@ -57,6 +57,6 @@
 
 <div class="counter-wrapper">
     <button class="increase" on:click={increase}><img src="/assets/chevron-up.svg" alt="increase life"></button>
-    <span class="damage {isDead ? 'dead' : ''}">{damage}</span>
+    <span class="damage" class:dead={isDead}>{damage}</span>
     <button class="decrease" on:click={decrease}><img src="/assets/chevron-down.svg" alt="decrease life"></button>
 </div>

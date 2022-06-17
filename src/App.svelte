@@ -62,12 +62,17 @@
 	
 	const increase = () => life++;
 	const decrease = () => life--;
+
+	// @ts-ignore
+	const hasBatteryApiSupport = typeof navigator.getBattery !== 'undefined';
 </script>
 
 <main>
 	<div class="header">
 		<Fullscreen />
-		<Battery />
+		{#if hasBatteryApiSupport }
+			<Battery />
+		{/if}
 	</div>
 	<div class="commander-damage">
 		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />

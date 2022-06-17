@@ -50,9 +50,9 @@
         updateChargeInfo();
         battery.addEventListener('chargingchange', updateChargeInfo);
         battery.addEventListener('levelchange', updateChargeInfo);
-    });    
+    });
 </script>
 
 <div class="battery-indicator">
-    <span class="percentage" class:low={level_percentage<10}>{level_percentage}%</span><img {...level}>
+    <span class="percentage" class:low={level_percentage<10}>{level_percentage}%</span><img src={level.src} alt={level.alt}>
 </div>
