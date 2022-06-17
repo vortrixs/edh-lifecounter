@@ -67,24 +67,22 @@
 
 <script lang="ts">
     export let life: number;
-    export let increase: () => void;
-    export let decrease: () => void;
-    export let showModal: () => void;
+    export let showCalculator: boolean;
 
     let timeout: NodeJS.Timeout;
     let ticker = 0;
+    
+    $: lifeTick = (ticker <= 0 ? '' : '+') + ticker;
 
-    $: lifeTick = (ticker<=0?"":"+") + ticker;
-
-    const increaseLife = () => {
-        increase();
+    const increase = () => {
+        life++;
         ticker++;
         clearTimeout(timeout);
         timeout = setTimeout(() => ticker = 0, 2000)
     }
 
-    const decreaseLife = () => {
-        decrease();
+    const decrease = () => {
+        life--;
         ticker--;
         clearTimeout(timeout);
         timeout = setTimeout(() => ticker = 0, 2000)
@@ -92,10 +90,10 @@
 </script>
 
 <div class="life-wrapper">
-    <button class="decrease" on:click={decreaseLife}/>
+    <button class="decrease" on:click={decrease}/>
     <div class="counters">
         <p class="ticker" class:hidden={ticker === 0} class:positive={ticker > 0} class:negative={ticker < 0} >{lifeTick}</p>
-        <p class="life" class:dead={life <= 0} on:click={showModal}>{life}</p>
+        <p class="life" class:dead={life <= 0} on:click={() => showCalculator = true}>{life}</p>
     </div>
-    <button class="increase" on:click={increaseLife}/>
+    <button class="increase" on:click={increase}/>
 </div>

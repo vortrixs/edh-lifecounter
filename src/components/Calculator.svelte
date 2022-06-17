@@ -43,10 +43,6 @@
         align-items: center;
     }
 
-    #calculator-subtract-toggle {
-        display: none;
-    }
-
     .delete {
         border: unset;
         background: unset;
@@ -73,7 +69,7 @@
         border-width: 4px;
     }
 
-    .save, #calculator-subtract-toggle:checked ~ .subtract {
+    .save, .subtract {
         border: unset;
         background-color: #3c3cff;
         color: #ffffff;
@@ -81,9 +77,8 @@
 </style>
 
 <script lang="ts">
-    export let currentLife: number;
-    export let hide: () => void;
-    export let update: (life: number) => void;   
+    export let life: number;
+    export let showCalculator: boolean;
 
     let subtract = false;
     let result = '0';
@@ -94,10 +89,8 @@
     }
 
     const save = () => {
-        subtract
-            ? update(currentLife - parseInt(result, 10))
-            : update(currentLife + parseInt(result, 10));
-        hide();
+        life = subtract ? life - parseInt(result, 10) : life + parseInt(result, 10);
+        showCalculator = false;
     };
 
     const deleteChar = () => {
@@ -122,15 +115,12 @@
         <button on:click={() => updateResult('7')} class="number">7</button>
         <button on:click={() => updateResult('8')} class="number">8</button>
         <button on:click={() => updateResult('9')} class="number">9</button>
-        <input id="calculator-subtract-toggle" type="checkbox"  on:change={() => subtract = !subtract}/>
-        <label for="calculator-subtract-toggle" class="subtract">
-            <span>-</span>
-        </label>
+        <button on:click={() => subtract = !subtract} class="number" class:subtract={subtract}>-</button>
         <button on:click={() => updateResult('0')} class="number">0</button>
         <button on:click={deleteChar} class="delete"><img src="/assets/delete.svg" alt="delete"></button>
     </div>
     <div class="actions">
-        <button on:click={hide} class="cancel">Cancel</button>
+        <button on:click={() => showCalculator = false} class="cancel">Cancel</button>
         <button on:click={save} class="save">Update</button>
     </div>
 </div>

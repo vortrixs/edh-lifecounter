@@ -33,8 +33,7 @@
 </style>
 
 <script lang="ts">
-    export let increaseLife: () => void;
-    export let decreaseLife: () => void;
+    export let life: number;
 
     let damage = 0;
 
@@ -43,14 +42,14 @@
     const increase = () => {
         if (damage < 21) {
             damage++;
-            decreaseLife()
+            life--;
         }
     }
 
     const decrease = () => {
        if (damage > 0) {
            damage--;
-           increaseLife()
+           life++;
         }
     }
 </script>

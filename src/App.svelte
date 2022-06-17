@@ -50,6 +50,11 @@
 	}
 </style>
 
+<script context="module">
+	// @ts-ignore
+	const hasBatteryApiSupport = typeof navigator.getBattery !== 'undefined';
+</script>
+
 <script lang="ts">
 	import LifeCounter from "./components/LifeCounter.svelte";
 	import CommanderDamage from "./components/CommanderDamage.svelte";
@@ -57,14 +62,8 @@
 	import Fullscreen from './components/Fullscreen.svelte'
 	import Battery from './components/Battery.svelte'
 
-	let life = 40;
-	let showCalculator = false;
-	
-	const increase = () => life++;
-	const decrease = () => life--;
-
-	// @ts-ignore
-	const hasBatteryApiSupport = typeof navigator.getBattery !== 'undefined';
+	export let life = 40;
+	export let showCalculator = false;
 </script>
 
 <main>
@@ -75,20 +74,20 @@
 		{/if}
 	</div>
 	<div class="commander-damage">
-		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
-		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
-		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
-		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
-		<CommanderDamage increaseLife={increase} decreaseLife={decrease} />
+		<CommanderDamage bind:life />
+		<CommanderDamage bind:life />
+		<CommanderDamage bind:life />
+		<CommanderDamage bind:life />
+		<CommanderDamage bind:life />
 	</div>
 	<div class="life-counter">
-		<LifeCounter life={life} increase={increase} decrease={decrease} showModal={() => showCalculator = true} />
+		<LifeCounter bind:life bind:showCalculator />
 	</div>
 </main>
 {#if showCalculator}
 <div class="modal">
 	<div class="life-calc">
-		<Calculator currentLife={life} hide={() => showCalculator = false} update={(newLife) => life = newLife} />
+		<Calculator bind:life bind:showCalculator />
 	</div>
 </div>
 {/if}
