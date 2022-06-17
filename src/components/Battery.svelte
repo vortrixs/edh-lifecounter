@@ -32,6 +32,8 @@
     let level = levels.empty;
     let level_percentage = 0;
 
+    $: low = level_percentage < 10;
+
     navigator.getBattery().then((battery) => {
         const updateChargeInfo = () => {
             level_percentage = Math.round(battery.level*100);
@@ -54,5 +56,5 @@
 </script>
 
 <div class="battery-indicator">
-    <span class="percentage" class:low={level_percentage<10}>{level_percentage}%</span><img src={level.src} alt={level.alt}>
+    <span class="percentage" class:low>{level_percentage}%</span><img src={level.src} alt={level.alt}>
 </div>

@@ -69,7 +69,7 @@
         border-width: 4px;
     }
 
-    .save, .subtract {
+    .save, .active {
         border: unset;
         background-color: #3c3cff;
         color: #ffffff;
@@ -83,7 +83,12 @@
     let subtract = false;
     let result = '0';
 
-    const updateResult = (number: string) => {
+    $: modifier = subtract ? '-' : '+';
+
+    const update = (e: Event) => {
+        const element = e.currentTarget as HTMLElement;
+        const number = element.textContent;
+        
         if (result === '0') result = number
         else result = result + number;
     }
@@ -98,29 +103,32 @@
         else if (result.length === 1) result = '0';
         else result = result.slice(0, -1);
     }
+
+    const hideCalc = () => showCalculator = false;
+    const toggleSubtract = () => subtract = !subtract;
 </script>
 
 <div class="calculator">
     <div class="result">
-        <span>{subtract ? '-' : '+'}</span>
+        <span>{modifier}</span>
         <span class="result">{result}</span>
     </div>
     <div class="buttons">
-        <button on:click={() => updateResult('1')} class="number">1</button>
-        <button on:click={() => updateResult('2')} class="number">2</button>
-        <button on:click={() => updateResult('3')} class="number">3</button>
-        <button on:click={() => updateResult('4')} class="number">4</button>
-        <button on:click={() => updateResult('5')} class="number">5</button>
-        <button on:click={() => updateResult('6')} class="number">6</button>
-        <button on:click={() => updateResult('7')} class="number">7</button>
-        <button on:click={() => updateResult('8')} class="number">8</button>
-        <button on:click={() => updateResult('9')} class="number">9</button>
-        <button on:click={() => subtract = !subtract} class="number" class:subtract={subtract}>-</button>
-        <button on:click={() => updateResult('0')} class="number">0</button>
+        <button on:click={update} class="number">1</button>
+        <button on:click={update} class="number">2</button>
+        <button on:click={update} class="number">3</button>
+        <button on:click={update} class="number">4</button>
+        <button on:click={update} class="number">5</button>
+        <button on:click={update} class="number">6</button>
+        <button on:click={update} class="number">7</button>
+        <button on:click={update} class="number">8</button>
+        <button on:click={update} class="number">9</button>
+        <button on:click={toggleSubtract} class="subtract" class:active={subtract}> - </button>
+        <button on:click={update} class="number">0</button>
         <button on:click={deleteChar} class="delete"><img src="/assets/delete.svg" alt="delete"></button>
     </div>
     <div class="actions">
-        <button on:click={() => showCalculator = false} class="cancel">Cancel</button>
+        <button on:click={hideCalc} class="cancel">Cancel</button>
         <button on:click={save} class="save">Update</button>
     </div>
 </div>

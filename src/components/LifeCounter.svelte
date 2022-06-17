@@ -73,6 +73,10 @@
     let ticker = 0;
     
     $: lifeTick = (ticker <= 0 ? '' : '+') + ticker;
+    $: hidden = ticker === 0;
+    $: positive = ticker > 0;
+    $: negative = ticker < 0;
+    $: dead = life <= 0;
 
     const increase = () => {
         life++;
@@ -87,13 +91,15 @@
         clearTimeout(timeout);
         timeout = setTimeout(() => ticker = 0, 2000)
     }
+
+    const showCalc = () => showCalculator = true;
 </script>
 
 <div class="life-wrapper">
     <button class="decrease" on:click={decrease}/>
     <div class="counters">
-        <p class="ticker" class:hidden={ticker === 0} class:positive={ticker > 0} class:negative={ticker < 0} >{lifeTick}</p>
-        <p class="life" class:dead={life <= 0} on:click={() => showCalculator = true}>{life}</p>
+        <p class="ticker" class:hidden class:positive class:negative>{lifeTick}</p>
+        <p class="life" class:dead on:click={showCalc}>{life}</p>
     </div>
     <button class="increase" on:click={increase}/>
 </div>
