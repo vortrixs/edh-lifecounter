@@ -1,21 +1,21 @@
-<style>
+<style lang="scss">
     .battery-indicator {
         display: flex;
         align-items: center;
         gap: 5px;
         padding-right: 10px;
-    }
 
-    .battery-indicator > img {
-        filter: brightness(0) invert(1);
+        & > img {
+            filter: brightness(0) invert(1);
+        }
     }
 
     .percentage {
         font-size: 12px;
-    }
 
-    .percentage.low {
-        color: #f8454e;
+        &.low {
+            color: #f8454e;
+        }
     }
 </style>
 
@@ -30,21 +30,21 @@
     }
 
     let level = levels.empty;
-    let level_percentage = 0;
+    let levelPercentage = 0;
 
-    $: low = level_percentage < 10;
+    $: low = levelPercentage < 10;
 
     navigator.getBattery().then((battery) => {
         const updateChargeInfo = () => {
-            level_percentage = Math.round(battery.level*100);
+            levelPercentage = Math.round(battery.level*100);
 
             if (battery.charging) {
                 level = levels.charging;
             } else {
-                if (level_percentage>75) level = levels.p100;
-                else if (level_percentage>50) level = levels.p75;
-                else if (level_percentage>25) level = levels.p50;
-                else if (level_percentage>10) level = levels.p25;
+                if (levelPercentage>75) level = levels.p100;
+                else if (levelPercentage>50) level = levels.p75;
+                else if (levelPercentage>25) level = levels.p50;
+                else if (levelPercentage>10) level = levels.p25;
                 else level = levels.empty;
             }
         }
@@ -56,5 +56,5 @@
 </script>
 
 <div class="battery-indicator">
-    <span class="percentage" class:low>{level_percentage}%</span><img src={level.src} alt={level.alt}>
+    <span class="percentage" class:low>{levelPercentage}%</span><img src={level.src} alt={level.alt}>
 </div>

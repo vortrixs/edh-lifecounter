@@ -1,11 +1,11 @@
-<style>
+<style lang="scss">
     .fullscreen-toggle {
 		display: flex;
 		padding-left: 10px;
-	}
 
-	.fullscreen-toggle > img {
-		filter: invert();
+		> img {
+			filter: #{"invert()"};
+		}
 	}
 </style>
 

@@ -1,4 +1,4 @@
-<style>
+<style lang="scss">
     .life-wrapper {
         width: inherit;
         height: 100%;
@@ -19,26 +19,26 @@
         position: fixed;
         font-size: 20px;
         font-weight: 700;
-    }
 
-    .ticker.positive {
-        color: #46d846;
-    }
+        &.positive {
+            color: #46d846;
+        }
 
-    .ticker.negative {
-        color: #d84646;
-    }
+        &.negative {
+            color: #d84646;
+        }
 
-    .ticker.hidden {
-        display: none;
+        &.hidden {
+            display: none;
+        }
     }
 
     .life {
         font-size: 80px;
-    }
 
-    .life.dead {
-        color: #d84646;
+        &.dead {
+            color: #d84646;
+        }
     }
 
     .increase {
@@ -57,11 +57,11 @@
         border: unset;
         width: 35%;
         height: 50%;
-    }
 
-    :is(.increase, .decrease):active {
-        background-color: hsl(0, 0%, 22%);
-        opacity: .5;
+        &:active {
+            background-color: hsl(0, 0%, 22%);
+            opacity: .5;
+        }
     }
 </style>
 

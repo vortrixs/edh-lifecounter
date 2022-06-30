@@ -1,4 +1,4 @@
-<style>
+<style lang="scss">
     .calculator {
         display: flex;
         flex-flow: column;
@@ -46,22 +46,22 @@
     .delete {
         border: unset;
         background: unset;
-    }
 
-    .delete > img {
-        transform: scale(1.5);
+        & > img {
+            transform: scale(1.5);
+        }
     }
 
     .actions {
         display: flex;
         justify-content: space-evenly;
         width: 100%;
-    }
 
-    .actions > button {
-        margin-top: 10px;
-        width: 45%;
-        border-radius: 12px;
+        & > button {
+            margin-top: 10px;
+            width: 45%;
+            border-radius: 12px;
+        }
     }
 
     .cancel {

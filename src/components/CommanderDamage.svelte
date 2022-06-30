@@ -1,4 +1,4 @@
-<style>
+<style lang="scss">
     .counter-wrapper {
         display: flex;
         flex-flow: column;
@@ -8,12 +8,11 @@
     .damage {
         font-size: 30px;
         margin: 15px 0;
-    }
 
-    .damage.dead {
-        color: #d84646;
+        &.dead {
+            color: #d84646;
+        }
     }
-
     .decrease > img {
         transform: translateY(1px);
     }
@@ -25,10 +24,10 @@
         height: 40px;
         background-color: #dddddd;
         margin: 0;
-    }
 
-    :is(.increase, .decrease):active {
-        background-color: #b6b6b6;
+        &:active {
+            background-color: #b6b6b6;
+        }
     }
 </style>
 
